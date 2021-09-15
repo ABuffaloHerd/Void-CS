@@ -19,14 +19,14 @@ namespace Void_CS
             TextHandler.Print(MultiSlash.ToString());
             TextHandler.Print(Fireball.ToString());
 
-            //Weapon KitchenKnife = new Weapon("Kitchen Knife", 2, 0);
-            //Weapon TankBuster = new Weapon("Tank Buster", 20, 100);
-            //Steve.AddWeapon(TankBuster);
+            Weapon KitchenKnife = new Weapon("Kitchen Knife", 2, 0);
+            Weapon TankBuster = new Weapon("Tank Buster", 20, 100);
+            Steve.AddWeapon(TankBuster);
 
-            //TextHandler.Print("Entering battlemode");
-            //TextHandler.PrintSeparator(length:40);
+            TextHandler.Print("Entering battlemode");
+            TextHandler.PrintSeparator(length: 40);
 
-            //Battle.BattleMode(Steve);
+            Battle.BattleMode(Steve);
         }
     }
 }
