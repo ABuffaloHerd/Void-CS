@@ -24,20 +24,6 @@ namespace Void_CS
             Console.Write("\n");
         }
 
-        // Like the last one but the timeout can be manually set for more dramatic effects.
-        public static void MPrint(string text, int timeout)
-        {
-            char[] array = text.ToCharArray();
-
-            foreach (char character in array)
-            {
-                Console.Write(character);
-                System.Threading.Thread.Sleep(timeout);
-            }
-
-            Console.Write("\n");
-        }
-
         public static void ManualSleep(int timeMS)
         {
             System.Threading.Thread.Sleep(timeMS);
