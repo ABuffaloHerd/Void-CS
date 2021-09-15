@@ -68,13 +68,15 @@ namespace Void_CS
         {
             Random rng = new Random();
 
-            int playerAttack = p1.GetATK();
+            Tuple<Int32, Double> playerAttack = p1.GetATK();
+
+            int playerAttackValue = playerAttack.Item1;
             int monsterAttack = monster.GetATK();
 
             TextHandler.Print("\nYou have chosen to attack.");
             TextHandler.Print("Rolling the dice...", timeout: 3);
 
-            int damage = rng.Next(playerAttack);
+            int damage = rng.Next(playerAttackValue);
 
             TextHandler.Print("Rolled to deal " + damage + " damage.");
             TextHandler.Print("Dealt " + monster.TakeDamage(damage) + " damage");

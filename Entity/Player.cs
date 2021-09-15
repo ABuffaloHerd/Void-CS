@@ -44,10 +44,14 @@ namespace Void_CS
 
         public override string ToString()
         {
-            return "Name: " + name + "\nLevel: " + level + "\nHP: " + hp;
+            return (String.Format("Name: {0}\nLevel: {1}\n" +
+                "HP: {2}/{3}\nMP: {4}/{5}\nSP: {6}/{7}\n" +
+                "ATK: {8}\nDEF: {9}\nRES: {10}\n",
+                name, level, hp, hp_max, mp, mp_max, sp, sp_max,
+                atk, def, res));
         }
 
-        // Returns inventory of player
+        // Returns inventory of player as ref
         public ref Inventory GetInventory()
         {
             return ref backpack;
@@ -123,15 +127,19 @@ namespace Void_CS
             }
         }
 
-        // Returns attack damage
-        new public int GetATK()
+        // Constructs a tuple containing the attack information. 
+        // returns this for the battle handler
+        new public Tuple<Int32, Double> GetATK()
         {
-            return atk + backpack.GetWeapon().GetAttackDamage();
+            Attack weaponAtk = GetInventory().GetWeapon().GetAttackDamage();
+            int totalAtk = atk + weaponAtk.GetATK();
+
+            return new Tuple<Int32, Double>(totalAtk, weaponAtk.GetCrit());
         }
 
-        new public int GetMATK()
+        new public Spell GetMATK()
         {
-            return matk + backpack.GetMagicWeapon().GetAttackDamage();
+            return null;
         }
 
         public int GetMP()

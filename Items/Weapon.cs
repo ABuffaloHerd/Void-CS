@@ -8,6 +8,7 @@ namespace Void_CS
 {
     class Weapon : Item
     {
+        private Attack attackObj;
         private protected int attackStat;
         private protected WeaponType weaponType;
 
@@ -16,6 +17,8 @@ namespace Void_CS
             this.name = name;
             this.cost = cost;
             attackStat = stat;
+
+            attackObj = new Attack(name + " hit", attackStat);
 
             type = ItemType.WEAPON;
             weaponType = WeaponType.MELEE;
@@ -28,20 +31,21 @@ namespace Void_CS
             return "Item: " + name + " Type: " + type + " Damage: " + attackStat;
         }
 
-        public int GetAttackDamage()
+        public Attack GetAttackDamage()
         {
-            return attackStat;
+            return attackObj;
         }
+    }
+
+    class MultiHiWeapon : Weapon
+    {
+
     }
 
     class MagicWeapon : Weapon
     {
-        public MagicWeapon(string name, int stat, int cost)
+        public MagicWeapon(string name, int stat, int cost) : base(name, stat, cost)
         {
-            this.name = name;
-            this.cost = cost;
-            attackStat = stat;
-
             type = ItemType.WEAPON;
             weaponType = WeaponType.MAGIC;
         }
