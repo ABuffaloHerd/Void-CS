@@ -13,7 +13,7 @@ namespace Void_CS
         BOSS
     }
 
-    class Entity
+    abstract class Entity
     {
         private protected string name;
         private protected int hp;
@@ -24,6 +24,7 @@ namespace Void_CS
         private protected int level;
 
         private protected EntityType type;
+        public abstract int TakeDamage(int dealt, bool ignoreDefense = false); // take damage, returns damage dealt
 
         public string GetName()
         {
@@ -35,19 +36,6 @@ namespace Void_CS
             return (hp < 0);
         }
 
-        public int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt
-        {
-            int ouch = dealt - def;
-
-            if (ouch < 0)
-            {
-                ouch = 0;
-            }
-
-            hp -= ouch;
-
-            return ouch;
-        }
 
         public int GetHP()
         {

@@ -51,6 +51,20 @@ namespace Void_CS
                 atk, def, res));
         }
 
+        public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt
+        {
+            int ouch = dealt - def;
+
+            if (ouch < 0)
+            {
+                ouch = 0;
+            }
+
+            hp -= ouch;
+
+            return ouch;
+        }
+
         // Returns inventory of player as ref
         public ref Inventory GetInventory()
         {

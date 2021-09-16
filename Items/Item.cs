@@ -38,15 +38,10 @@ namespace Void_CS
         PANTS
     }
 
-    class Item
+    abstract class Item
     {
         private protected ItemType type;
         private protected string name;
         private protected int cost;
-
-        public override string ToString()
-        {
-            return "Item: " + name + " Type: " + type;
-        }
     }
 }

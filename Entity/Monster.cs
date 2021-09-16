@@ -40,5 +40,19 @@ namespace Void_CS
         {
             return "Name: " + name + "\nHP: " + hp + "\nDEF: " + def + "\nRES: " + res;
         }
+
+        public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt
+        {
+            int ouch = dealt - def;
+
+            if (ouch < 0)
+            {
+                ouch = 0;
+            }
+
+            hp -= ouch;
+
+            return ouch;
+        }
     }
 }
