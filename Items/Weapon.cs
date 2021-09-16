@@ -12,13 +12,13 @@ namespace Void_CS
         private protected int attackStat;
         private protected WeaponType weaponType;
 
-        public Weapon(string name, int stat, int cost)
+        public Weapon(string name, int stat, int cost, double crit = 0.05)
         {
             this.name = name;
             this.cost = cost;
             attackStat = stat;
 
-            attackObj = new Attack(name + " hit", attackStat);
+            attackObj = new Attack(name + " hit", attackStat, crit);
 
             type = ItemType.WEAPON;
             weaponType = WeaponType.MELEE;

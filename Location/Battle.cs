@@ -77,9 +77,18 @@ namespace Void_CS
             TextHandler.Print("Rolling the dice...", timeout: 3);
 
             int damage = rng.Next(playerAttackValue);
+            
+            if(rng.NextDouble() <= playerAttack.Item2)
+            {
+                TextHandler.Print("Critial hit! Rolled " + damage * 3 + " damage.");
+                TextHandler.Print("Dealt " + monster.TakeDamage(damage * 3) + " damage");
+            }
+            else
+            {
+                TextHandler.Print("Rolled to deal " + damage + " damage.");
+                TextHandler.Print("Dealt " + monster.TakeDamage(damage) + " damage");
+            }
 
-            TextHandler.Print("Rolled to deal " + damage + " damage.");
-            TextHandler.Print("Dealt " + monster.TakeDamage(damage) + " damage");
             TextHandler.Print("Opponent HP remaining:" + monster.GetHP());
             System.Threading.Thread.Sleep(1000);
 
@@ -90,6 +99,8 @@ namespace Void_CS
             }
             else
             {
+                TextHandler.Print("Press enter to continue...");
+                Console.ReadLine();
                 MonsterAttack(p1, monster);
             }
         }

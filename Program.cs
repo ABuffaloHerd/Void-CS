@@ -11,13 +11,12 @@ namespace Void_CS
             Player Steve = new Player("Nigga", "holy grail", "black ass nigga");
             TextHandler.Print(Steve.ToString());
 
-            Helmet LeatherCap = new Helmet("Leather cap", 2, 0, 2);
-            Chestplate SteelChest = new Chestplate("Steel Chestplate", 8, 1, 20);
-            Leggings AntiMagicPants = new Leggings("Anti Magic Pants", 2, 10, 50);
+            Weapon Sword = new Weapon("Steel Blade", 10, 20);
+            TextHandler.Print(Sword.ToString());
+            TextHandler.Print(Sword.GetAttackDamage().ToString());
+            Steve.AddWeapon(Sword);
 
-            TextHandler.Print(LeatherCap.ToString());
-            TextHandler.Print(SteelChest.ToString());
-            TextHandler.Print(AntiMagicPants.ToString());
+            Battle.BattleMode(Steve);
         }
     }
 }

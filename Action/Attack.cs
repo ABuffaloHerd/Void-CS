@@ -12,7 +12,7 @@ namespace Void_CS
         private protected int baseAtk;
         private protected double critChance;
 
-        public Attack(string name, int baseAtk, double crit = 0.05)
+        public Attack(string name, int baseAtk, double crit)
         {
             this.name = name;
             this.baseAtk = baseAtk;
@@ -45,7 +45,7 @@ namespace Void_CS
         private protected bool recursive;
         private protected double recursiveChance; // chance to hit again
 
-        public RecursiveAttack(string name, int baseatk, double recursiveChance, double critChance = 0.02) : base(name, baseatk)
+        public RecursiveAttack(string name, int baseatk, double recursiveChance, double critChance = 0.02) : base(name, baseatk, critChance)
         {
             recursive = true;
             this.recursiveChance = recursiveChance;
