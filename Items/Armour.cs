@@ -17,7 +17,7 @@ namespace Void_CS
             return defenseStat;
         }
 
-        public int GetResStat()
+        public int GetRes()
         {
             return resStat;
         }

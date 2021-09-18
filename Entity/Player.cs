@@ -44,23 +44,30 @@ namespace Void_CS
 
         public override string ToString()
         {
+            var DefenseStats = GetDEF();
             return (String.Format("Name: {0}\nLevel: {1}\n" +
                 "HP: {2}/{3}\nMP: {4}/{5}\nSP: {6}/{7}\n" +
-                "ATK: {8}\nDEF: {9}\nRES: {10}\n",
+                "ATK: {8}\nDEF: {9}\nRES: {10}%\n",
                 name, level, hp, hp_max, mp, mp_max, sp, sp_max,
-                atk, def, res));
+                atk, DefenseStats.Item1, DefenseStats.Item2 * 100));
         }
 
-        public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt
+        public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt. if ignoredef is true then res is used
         {
-            int ouch = dealt - def;
+            int ouch = 0;
 
-            if (ouch < 0)
-            {
-                ouch = 0;
+            if(!ignoreDefense)
+            { 
+                ouch = dealt - GetDEF().Item1;
+
+                if (ouch < 0)
+                {
+                    ouch = 0;
+                }
+
+                hp -= ouch;
+
             }
-
-            hp -= ouch;
 
             return ouch;
         }
@@ -149,6 +156,12 @@ namespace Void_CS
             int totalAtk = atk + weaponAtk.GetATK();
 
             return new Tuple<Int32, Double>(totalAtk, weaponAtk.GetCrit());
+        }
+
+        // Returns a tuple containing defense and res
+        new public Tuple<Int32, Double> GetDEF()
+        {
+            return new Tuple<Int32, Double>(GetInventory().GetTotalDefense() + def, GetInventory().GetTotalRes() + ((double)res / 100));
         }
 
         new public Spell GetMATK()
