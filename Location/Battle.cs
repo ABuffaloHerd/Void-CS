@@ -80,7 +80,7 @@ namespace Void_CS
             
             if(rng.NextDouble() <= playerAttack.Item2)
             {
-                TextHandler.Print("Critial hit! Rolled " + damage * 3 + " damage.");
+                TextHandler.Print(String.Format("Ouch! Critial hit! Rolled {0} instead of {1} damage.", damage * 3, damage));
                 TextHandler.Print("Dealt " + monster.TakeDamage(damage * 3) + " damage");
             }
             else
@@ -121,8 +121,16 @@ namespace Void_CS
             TextHandler.Print("Took " + p1.TakeDamage(damage) + " damage");
             TextHandler.Print("HP remaining: " + p1.GetHP());
 
-            TextHandler.Print("Press enter to continue...");
-            Console.ReadLine();
+            if (p1.IsDead())
+            {
+                TextHandler.Print("Retard! You died!");
+                return;
+            }
+            else
+            {
+                TextHandler.Print("Press enter to continue...");
+                Console.ReadLine();
+            }
         }
 
         public static void MagicAttack(Player p1, Monster monster)

@@ -11,7 +11,7 @@ namespace Void_CS
             Player Steve = new Player("Nigga", "holy grail", "black ass nigga");
             TextHandler.Print(Steve.ToString());
 
-            Weapon Sword = new Weapon("Steel Blade", 10, 20);
+            Weapon Sword = new Weapon("Steel Blade", 10, 2);
             TextHandler.Print(Sword.ToString());
             TextHandler.Print(Sword.GetAttackDamage().ToString());
             Steve.AddWeapon(Sword);

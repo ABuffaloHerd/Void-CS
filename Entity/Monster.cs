@@ -29,7 +29,7 @@ namespace Void_CS
             Random rng = new Random();
 
             hp      = (10 * level) + rng.Next(10);
-            atk     = rng.Next(10) + ((level - 1) * 5);
+            atk     = rng.Next(10) + ((level - 1) * 5) + 400;
             matk    = rng.Next(2) + ((level * 7) * 5);
 
             def = rng.Next(5) * level;

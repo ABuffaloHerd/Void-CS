@@ -24,6 +24,7 @@ namespace Void_CS
             weaponType = WeaponType.MELEE;
         }
 
+        // visual studio won't shut up if i don't have a blank constructor
         public Weapon() { }
 
         public override string ToString()
