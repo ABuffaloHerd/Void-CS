@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Void_CS.Entity;
+using Void_CS.Handler;
 
-namespace Void_CS
+namespace Void_CS.Location
 {
     // Battlefield object has methods that deal with fighting
     class Battle

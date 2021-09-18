@@ -5,31 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Basically, backpack manager
-namespace Void_CS
+namespace Void_CS.Items
 {
     class Inventory
-    {   
-        private protected Weapon weapon;
-        private protected MagicWeapon magicWeapon;
-
+    {
+        private protected Weapon[] weaponList;
         private protected Armour[] armourList;
 
         public Inventory()
         {
-            weapon = null;
-            magicWeapon = null;
-
-            armourList = new Armour[3];
+            weaponList = new Weapon[3] { null, null, null };
+            armourList = new Armour[3] { null, null, null };
         }
 
         public void EquipWeapon(Weapon thing)
         {
-            weapon = thing;
+            weaponList[0] = thing;
         }
 
         public void EquipMagicWeapon(MagicWeapon thing)
         {
-            magicWeapon = thing;
+            weaponList[2] = thing;
         }
 
         public void EquipHelm(Helmet helm)
@@ -82,14 +78,9 @@ namespace Void_CS
             return total / 100;
         }
 
-        public Weapon GetWeapon()
+        public Weapon GetWeapon(WeaponType type)
         {
-            return weapon;
-        }
-
-        public MagicWeapon GetMagicWeapon()
-        {
-            return magicWeapon;
+            return weaponList[(int)type];
         }
     }
 }

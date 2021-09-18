@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Void_CS.Handler;
+using Void_CS.Action;
 
-namespace Void_CS
+namespace Void_CS.Items
 {
-    class Weapon : Item
+    abstract class Weapon : Item
     {
-        private Attack attackObj;
+        private protected Attack attackObj;
         private protected int attackStat;
+        private protected double hitChance;
         private protected WeaponType weaponType;
 
-        public Weapon(string name, int stat, int cost, double crit = 0.05)
+        public Weapon(string name, int stat, int cost, double crit)
         {
             this.name = name;
             this.cost = cost;
             attackStat = stat;
 
-            attackObj = new Attack(name + " hit", attackStat, crit);
-
             type = ItemType.WEAPON;
-            weaponType = WeaponType.MELEE;
         }
-
-        // visual studio won't shut up if i don't have a blank constructor
-        public Weapon() { }
 
         public override string ToString()
         {
@@ -38,14 +35,35 @@ namespace Void_CS
         }
     }
 
-    class MultiHiWeapon : Weapon
+    class MeleeWeapon : Weapon
     {
+        public MeleeWeapon(string name, int stat, int cost, double crit = Constants.MELEE_CRIT_CHANCE, bool isRecursive = false) : base(name, stat, cost, crit)
+        {
+            weaponType = WeaponType.MELEE;
 
+            if (!isRecursive)
+            {
+                attackObj = new Attack(null, stat, crit);
+            }
+            else
+            {
+                attackObj = new RecursiveAttack(null, stat, Constants.RECURSIVE_HIT_CHANCE, Void_CS.Handler.Constants.RECURSIVE_CRIT_CHANCE);
+            }
+        }
+    }
+
+    class RangedWeapon : Weapon
+    {
+        public RangedWeapon(string name, int stat, int cost, double crit = Constants.RANGED_CRIT_CHANCE) : base(name, stat, cost, crit)
+        {
+            weaponType = WeaponType.RANGED;
+            attackObj = new RangedAttack(null, stat, crit);
+        }
     }
 
     class MagicWeapon : Weapon
     {
-        public MagicWeapon(string name, int stat, int cost) : base(name, stat, cost)
+        public MagicWeapon(string name, int stat, int cost, double crit = Constants.SPELL_CRIT_CHANCE) : base(name, stat, cost, crit)
         {
             type = ItemType.WEAPON;
             weaponType = WeaponType.MAGIC;

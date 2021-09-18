@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Void_CS.Entity;
 
-namespace Void_CS
+namespace Void_CS.Handler
 {
     // This bad bitch spawns a monster based on player level
     class MonsterGenerator

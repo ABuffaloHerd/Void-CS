@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Void_CS.Items;
+using Void_CS.Action;
 
-namespace Void_CS
+namespace Void_CS.Entity
 {
     class Player : Entity
     {
@@ -152,7 +154,7 @@ namespace Void_CS
         // returns this for the battle handler
         new public Tuple<Int32, Double> GetATK()
         {
-            Attack weaponAtk = GetInventory().GetWeapon().GetAttackDamage();
+            Attack weaponAtk = GetInventory().GetWeapon(WeaponType.MELEE).GetAttackDamage();
             int totalAtk = atk + weaponAtk.GetATK();
 
             return new Tuple<Int32, Double>(totalAtk, weaponAtk.GetCrit());

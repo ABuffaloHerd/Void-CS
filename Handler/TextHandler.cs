@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Void_CS
+namespace Void_CS.Handler
 {
     class TextHandler
     {

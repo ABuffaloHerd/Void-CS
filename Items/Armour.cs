@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Void_CS
+namespace Void_CS.Items
 {
     class Armour : Item
     {

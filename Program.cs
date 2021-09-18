@@ -1,4 +1,8 @@
 ﻿using System;
+using Void_CS.Entity;
+using Void_CS.Handler;
+using Void_CS.Items;
+using Void_CS.Location;
 
 namespace Void_CS
 {
@@ -11,7 +15,7 @@ namespace Void_CS
             Player Steve = new Player("Nigga", "holy grail", "black ass nigga");
             TextHandler.Print(Steve.ToString());
 
-            Weapon Sword = new Weapon("Steel Blade", 10, 2);
+            Weapon Sword = new MeleeWeapon("Steel Blade", 10, 2);
             TextHandler.Print(Sword.ToString());
             TextHandler.Print(Sword.GetAttackDamage().ToString());
             Steve.AddWeapon(Sword);

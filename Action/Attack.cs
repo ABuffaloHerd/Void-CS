@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Void_CS
+namespace Void_CS.Action
 {
     class Attack
     {
@@ -45,7 +45,7 @@ namespace Void_CS
         private protected bool recursive;
         private protected double recursiveChance; // chance to hit again
 
-        public RecursiveAttack(string name, int baseatk, double recursiveChance, double critChance = 0.02) : base(name, baseatk, critChance)
+        public RecursiveAttack(string name, int baseatk, double recursiveChance, double critChance) : base(name, baseatk, critChance)
         {
             recursive = true;
             this.recursiveChance = recursiveChance;
@@ -55,6 +55,15 @@ namespace Void_CS
         public override string ToString()
         {
             return "Recursive Attack: " + name + "\nDamage: " + baseAtk + "\nRecursive Chance: " + recursiveChance;
+        }
+    }
+
+    // Ranged attacks offer higher crit chance
+    class RangedAttack : Attack
+    {
+        public RangedAttack(string name, int baseatk, double critChance) : base(name, baseatk, critChance)
+        {
+            this.critChance = critChance;
         }
     }
 }
