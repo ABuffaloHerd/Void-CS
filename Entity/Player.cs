@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Void_CS.Items;
+
 using Void_CS.Action;
+using Void_CS.Items;
+using Void_CS.Handler;
 
 namespace Void_CS.Entity
 {
@@ -27,8 +29,9 @@ namespace Void_CS.Entity
         private const int SP_MAX_ABS = 30;
 
         private Inventory backpack;
-        private int gold;
+        private Spell[] spellList;
 
+        private int gold;
         public Player(string name, string quest, string colour)
         {
             this.name = name;
@@ -39,6 +42,8 @@ namespace Void_CS.Entity
             type = EntityType.PLAYER;
             level = 1;
             exp = 0;
+
+            spellList = new Spell[SpellCapacity.DEFAULT_SPELL_CAP];
 
             SetStatsFromLevel();
             RefreshStats();
