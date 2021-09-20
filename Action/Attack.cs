@@ -21,7 +21,7 @@ namespace Void_CS.Action
 
         public override string ToString()
         {
-            return "Attack: " + name + "\nDamage: " + baseAtk;
+            return String.Format("Damage: {0}\nCrit: {1}", baseAtk, critChance);
         }
 
         public string GetName()
