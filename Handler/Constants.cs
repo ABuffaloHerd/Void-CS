@@ -12,8 +12,11 @@ namespace Void_CS.Handler
         public const double RANGED_CRIT_CHANCE = 0.21;
         public const double SPELL_CRIT_CHANCE = 0.05;
         public const double RECURSIVE_CRIT_CHANCE = 0.02;
-
         public const double RECURSIVE_HIT_CHANCE = 0.7;
+    }
 
+    static class SpellCapacity
+    {
+        public const int DEFAULT_SPELL_CAP = 8;
     }
 }

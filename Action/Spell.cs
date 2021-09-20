@@ -9,7 +9,7 @@ namespace Void_CS.Action
     class Spell : Attack
     {
         private protected int cost;
-        public Spell(string name, int baseAtk, int cost, double critChance = 0.1) : base(name, baseAtk, critChance)
+        public Spell(string name, int baseAtk, int cost, double critChance) : base(name, baseAtk, critChance)
         {
             this.cost = cost;
             this.critChance = critChance;
