@@ -3,14 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Void_CS.Action;
 
 // Basically, backpack manager
 namespace Void_CS.Items
 {
+    enum EArmourSlot
+    {
+        head = 0,
+        chest,
+        legs
+    }
+
+    enum EWeaponSlot
+    {
+        melee = 0,
+        ranged,
+        magic
+    }
     class Inventory
     {
-        private protected Weapon[] weaponList;
-        private protected Armour[] armourList;
+        private Weapon[] weaponList;
+        private Armour[] armourList;
+        private Spell[] spellList;
 
         public Inventory()
         {
@@ -18,30 +33,42 @@ namespace Void_CS.Items
             armourList = new Armour[3] { null, null, null };
         }
 
+#pragma warning disable CS0184 // ok ok you can shut up now
         public void EquipWeapon(Weapon thing)
         {
-            weaponList[0] = thing;
+
+            if(thing.GetType() is MeleeWeapon)
+            {
+                weaponList[(int)EWeaponSlot.melee] = thing;
+            }
+            else if (thing.GetType() is RangedWeapon)
+            {
+                weaponList[(int)EWeaponSlot.ranged] = thing;
+            }
+            else if (thing.GetType() is MagicWeapon)
+            {
+                weaponList[(int)EWeaponSlot.magic] = thing;
+            }
+
         }
 
-        public void EquipMagicWeapon(MagicWeapon thing)
+        public void EquipArmour(Armour thing)
         {
-            weaponList[2] = thing;
+            if (thing.GetType() is Helmet)
+            {
+                armourList[(int)EArmourSlot.head] = thing;
+            }
+            else if(thing.GetType() is Chestplate)
+            {
+                armourList[(int)EArmourSlot.chest] = thing;
+            }
+            else if(thing.GetType() is Leggings)
+            {
+                armourList[(int)EArmourSlot.legs] = thing;
+            }
         }
 
-        public void EquipHelm(Helmet helm)
-        {
-            armourList[0] = helm;
-        }
-
-        public void EquipChest(Chestplate chest)
-        {
-            armourList[1] = chest;
-        }
-
-        public void EquipLegs(Leggings pants)
-        {
-            armourList[2] = pants;
-        }
+#pragma warning restore CS0184
 
         public Armour GetArmour(ArmourType type)
         {
