@@ -22,6 +22,11 @@ namespace Void_CS.Items
             return resStat;
         }
 
+        public ArmourType GetArmourType()
+        {
+            return armourType;
+        }
+
         public override string ToString()
         {
             return (String.Format("Name: {0}\nDefense: {1}\nResist: {2},\nCost: {3}\nSlot: {4}\n", name, defenseStat, resStat, cost, armourType.ToString()));

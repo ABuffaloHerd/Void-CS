@@ -8,19 +8,6 @@ using Void_CS.Action;
 // Basically, backpack manager
 namespace Void_CS.Items
 {
-    enum EArmourSlot
-    {
-        head = 0,
-        chest,
-        legs
-    }
-
-    enum EWeaponSlot
-    {
-        melee = 0,
-        ranged,
-        magic
-    }
     class Inventory
     {
         private Weapon[] weaponList;
@@ -37,34 +24,34 @@ namespace Void_CS.Items
         public void EquipWeapon(Weapon thing)
         {
 
-            if(thing.GetType() is MeleeWeapon)
+            if(thing.GetWeaponType() is WeaponType.MELEE)
             {
-                weaponList[(int)EWeaponSlot.melee] = thing;
+                weaponList[(int)WeaponType.MELEE] = thing;
             }
-            else if (thing.GetType() is RangedWeapon)
+            else if (thing.GetWeaponType() is WeaponType.RANGED)
             {
-                weaponList[(int)EWeaponSlot.ranged] = thing;
+                weaponList[(int)WeaponType.RANGED] = thing;
             }
-            else if (thing.GetType() is MagicWeapon)
+            else if (thing.GetWeaponType() is WeaponType.MAGIC)
             {
-                weaponList[(int)EWeaponSlot.magic] = thing;
+                weaponList[(int)WeaponType.MAGIC] = thing;
             }
 
         }
 
         public void EquipArmour(Armour thing)
         {
-            if (thing.GetType() is Helmet)
+            if (thing.GetArmourType() is ArmourType.HELMET)
             {
-                armourList[(int)EArmourSlot.head] = thing;
+                armourList[(int)ArmourType.HELMET] = thing;
             }
-            else if(thing.GetType() is Chestplate)
+            else if(thing.GetArmourType() is ArmourType.CHESTPLATE)
             {
-                armourList[(int)EArmourSlot.chest] = thing;
+                armourList[(int)ArmourType.CHESTPLATE] = thing;
             }
-            else if(thing.GetType() is Leggings)
+            else if(thing.GetArmourType() is ArmourType.PANTS)
             {
-                armourList[(int)EArmourSlot.legs] = thing;
+                armourList[(int)ArmourType.PANTS] = thing;
             }
         }
 

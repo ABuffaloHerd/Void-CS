@@ -35,6 +35,11 @@ namespace Void_CS.Items
         {
             return attackObj;
         }
+
+        public WeaponType GetWeaponType()
+        {
+            return weaponType;
+        }
     }
 
     class MeleeWeapon : Weapon

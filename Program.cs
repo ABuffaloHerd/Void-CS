@@ -15,6 +15,8 @@ namespace Void_CS
             Player Steve = new Player("Nigga", "holy grail", "black ass nigga");
             TextHandler.Print(Steve.ToString());
 
+            Steve.AddWeapon(MeleeWeaponList.WoodSword);
+
             //Battle.BattleMode(Steve);
         }
     }
