@@ -24,15 +24,15 @@ namespace Void_CS.Items
         public void EquipWeapon(Weapon thing)
         {
 
-            if(thing.GetWeaponType() is WeaponType.MELEE)
+            if(thing.GetWeaponType() == WeaponType.MELEE)
             {
                 weaponList[(int)WeaponType.MELEE] = thing;
             }
-            else if (thing.GetWeaponType() is WeaponType.RANGED)
+            else if (thing.GetWeaponType() == WeaponType.RANGED)
             {
                 weaponList[(int)WeaponType.RANGED] = thing;
             }
-            else if (thing.GetWeaponType() is WeaponType.MAGIC)
+            else if (thing.GetWeaponType() == WeaponType.MAGIC)
             {
                 weaponList[(int)WeaponType.MAGIC] = thing;
             }
@@ -41,15 +41,15 @@ namespace Void_CS.Items
 
         public void EquipArmour(Armour thing)
         {
-            if (thing.GetArmourType() is ArmourType.HELMET)
+            if (thing.GetArmourType() == ArmourType.HELMET)
             {
                 armourList[(int)ArmourType.HELMET] = thing;
             }
-            else if(thing.GetArmourType() is ArmourType.CHESTPLATE)
+            else if(thing.GetArmourType() == ArmourType.CHESTPLATE)
             {
                 armourList[(int)ArmourType.CHESTPLATE] = thing;
             }
-            else if(thing.GetArmourType() is ArmourType.PANTS)
+            else if(thing.GetArmourType() == ArmourType.PANTS)
             {
                 armourList[(int)ArmourType.PANTS] = thing;
             }
