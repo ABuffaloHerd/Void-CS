@@ -23,7 +23,6 @@ namespace Void_CS.Items
 #pragma warning disable CS0184 // ok ok you can shut up now
         public void EquipWeapon(Weapon thing)
         {
-
             if(thing.GetWeaponType() == WeaponType.MELEE)
             {
                 weaponList[(int)WeaponType.MELEE] = thing;
@@ -36,7 +35,6 @@ namespace Void_CS.Items
             {
                 weaponList[(int)WeaponType.MAGIC] = thing;
             }
-
         }
 
         public void EquipArmour(Armour thing)

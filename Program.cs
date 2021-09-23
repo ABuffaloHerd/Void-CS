@@ -17,7 +17,7 @@ namespace Void_CS
 
             Steve.AddWeapon(MeleeWeaponList.WoodSword);
 
-            //Battle.BattleMode(Steve);
+            Battle.BattleMode(Steve);
         }
     }
 }

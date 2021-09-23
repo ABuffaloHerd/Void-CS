@@ -72,10 +72,19 @@ namespace Void_CS.Entity
                     ouch = 0;
                 }
 
-                hp -= ouch;
+            }
+            else
+            {
+                double reduced = dealt - (GetDEF().Item2 * dealt);
+                ouch -= dealt;
 
+                if (reduced < 0)
+                {
+                    ouch = 0;
+                }
             }
 
+            hp -= ouch;
             return ouch;
         }
 

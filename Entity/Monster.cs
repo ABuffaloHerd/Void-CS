@@ -29,7 +29,7 @@ namespace Void_CS.Entity
             Random rng = new Random();
 
             hp      = (10 * level) + rng.Next(10);
-            atk     = rng.Next(10) + ((level - 1) * 5) + 400;
+            atk     = rng.Next(10) + ((level - 1) * 5);
             matk    = rng.Next(2) + ((level * 7) * 5);
 
             def = rng.Next(5) * level;
@@ -41,17 +41,32 @@ namespace Void_CS.Entity
             return "Name: " + name + "\nHP: " + hp + "\nDEF: " + def + "\nRES: " + res;
         }
 
-        public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt
+        public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt. if ignoredef is true then res is used
         {
-            int ouch = dealt - def;
+            int ouch = 0;
 
-            if (ouch < 0)
+            if (!ignoreDefense)
             {
-                ouch = 0;
+                ouch = dealt - def;
+
+                if (ouch < 0)
+                {
+                    ouch = 0;
+                }
+
+            }
+            else
+            {
+                double reduced = dealt - (res * dealt);
+                ouch -= dealt;
+
+                if (reduced < 0)
+                {
+                    ouch = 0;
+                }
             }
 
             hp -= ouch;
-
             return ouch;
         }
     }

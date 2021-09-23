@@ -6,4 +6,12 @@
     <RootNamespace>Void_CS</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Windows.Extensions" Version="5.0.0" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="XCOPY &quot;$(SolutionDir)Resources&quot; &quot;$(TargetDir)&quot; /Y /S" />
+  </Target>
+
 </Project>

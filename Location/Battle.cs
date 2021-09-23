@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Void_CS.Entity;
 using Void_CS.Handler;
 
@@ -28,6 +30,9 @@ namespace Void_CS.Location
         }
         public static void BattleMode(Player p1)
         {
+            SoundPlayer soundPlayer = new SoundPlayer("Audio\\select.wav");
+            soundPlayer.Play();
+
             Monster opponent = MonsterGenerator.GenerateMonster(p1);
 
             while(!p1.IsDead() && !opponent.IsDead())
