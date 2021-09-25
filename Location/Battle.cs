@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Void_CS.Entity;
 using Void_CS.Handler;
+using Void_CS.Action;
 
 namespace Void_CS.Location
 {
@@ -31,7 +32,7 @@ namespace Void_CS.Location
         public static void BattleMode(Player p1)
         {
             SoundPlayer soundPlayer = new SoundPlayer("Audio\\select.wav");
-            soundPlayer.Play();
+            soundPlayer.PlayLooping();
 
             Monster opponent = MonsterGenerator.GenerateMonster(p1);
 
@@ -57,7 +58,8 @@ namespace Void_CS.Location
                         break;
 
                     case Action.MAGIC:
-                        TextHandler.Print("Magic attack goes here");
+                        // Magic attack goes here
+                        MagicAttack(p1, opponent);
                         break;
 
                     case Action.SPECIAL:
@@ -142,7 +144,48 @@ namespace Void_CS.Location
 
         public static void MagicAttack(Player p1, Monster monster)
         {
+            int selection;
+            bool valid;
+            Spell spell;
 
+            Random rng = new Random();
+
+            do
+            {
+                TextHandler.Print("You have chosen to toss magic.\nPlease select a spell.\n");
+                TextHandler.Print(p1.GetSpellList(), 2);
+
+                valid = Int32.TryParse(Console.ReadLine(), out selection);
+            }
+            while (!valid || selection >= SpellCapacity.DEFAULT_SPELL_CAP || p1.GetSpell(selection) is null);
+
+            spell = p1.GetSpell(selection);
+            Tuple<Int32, Double, Boolean, Int32> playerSpellSpecs = p1.GetMATK(selection);
+            
+            TextHandler.Print(String.Format("You have selected {0}", p1.GetSpell(selection).GetName()));
+
+            // Do i have enough mana?
+            if (!playerSpellSpecs.Item3)
+            {
+                TextHandler.Print("Insufficient mana to cast this spell.");
+                return;
+            }
+
+            // Is it a crit?
+            if (rng.NextDouble() <= playerSpellSpecs.Item2)
+            {
+                TextHandler.Print(String.Format("Oof! Critical hit! Rolled {0} instead of {1} damage.", playerSpellSpecs.Item1 * 3, playerSpellSpecs.Item1));
+                TextHandler.Print("Dealt {0} damage. That's gotta hurt.", monster.TakeDamage(playerSpellSpecs.Item1 * 3, true));\
+
+                p1.UseMP(playerSpellSpecs.Item4);
+                TextHandler.Print(String.Format("MP: {0}/{1}", p1.GetMP(), p1.GetMaxMP()));
+            }
+            else
+            {
+                TextHandler.Print("Casting...");
+                TextHandler.Print("Dealt {0} damage.", monster.TakeDamage(playerSpellSpecs.Item1));
+                p1.UseMP(playerSpellSpecs.Item4);
+            }
         }
     }
 }
