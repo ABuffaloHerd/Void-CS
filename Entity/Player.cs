@@ -53,7 +53,7 @@ namespace Void_CS.Entity
                 "HP: {2}/{3}\nMP: {4}/{5}\nSP: {6}/{7}\n" +
                 "ATK: {8}\nDEF: {9}\nRES: {10}%\n",
                 name, level, hp, hp_max, mp, mp_max, sp, sp_max,
-                atk, DefenseStats.Item1, DefenseStats.Item2 * 100));
+                atk, DefenseStats.Item1, DefenseStats.Item2));
         }
 
         public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt. if ignoredef is true then res is used
@@ -158,7 +158,7 @@ namespace Void_CS.Entity
             // Defense is flat damage reduction
             // Resistance is magic resist by % like arknights
             def = 5 * level;
-            res = 1 + ((level - 1) * 2);
+            res = (1 + ((level - 1) * 2) / 100);
         }
         public void CheckEXP()
         {
@@ -175,7 +175,17 @@ namespace Void_CS.Entity
         // returns this for the battle handler
         new public Tuple<Int32, Double> GetATK()
         {
-            Attack weaponAtk = GetInventory().GetWeapon(WeaponType.MELEE).GetAttackDamage();
+            Attack weaponAtk;
+
+            try
+            {
+                weaponAtk = GetInventory().GetWeapon(WeaponType.MELEE).GetAttackDamage();
+            }
+            catch (Exception e)
+            {
+                weaponAtk = new Attack(null, 0, 0);
+            }
+
             int totalAtk = atk + weaponAtk.GetATK();
 
             return new Tuple<Int32, Double>(totalAtk, weaponAtk.GetCrit());
@@ -191,7 +201,7 @@ namespace Void_CS.Entity
         public Tuple<Int32, Double, Boolean, Int32> GetMATK(int index)
         {
             Spell spell = backpack.GetSpell(index);
-            bool canUse = (spell.GetCost() - mp) > 0;
+            bool canUse = (mp - spell.GetCost()) > 0;
 
             return new Tuple<Int32, Double, Boolean, Int32>(spell.GetATK(), spell.GetCrit(), canUse, spell.GetCost());
         }

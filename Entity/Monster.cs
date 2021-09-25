@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Void_CS.Handler;
 
 namespace Void_CS.Entity
 {
     class Monster : Entity
     {
-        public Monster(string name, int hp, int def, int res, int atk, int level)
+        public Monster(string name, int hp, int def, double res, int atk, int level)
         {
             this.name = name;
             this.hp = hp;
@@ -33,12 +34,12 @@ namespace Void_CS.Entity
             matk    = rng.Next(2) + ((level * 7) * 5);
 
             def = rng.Next(5) * level;
-            res = 1 + ((level - 1) * 2);
+            res = (1 + ((level - 1) * 2)) / 100.0;
         }
 
         public override string ToString()
         {
-            return "Name: " + name + "\nHP: " + hp + "\nDEF: " + def + "\nRES: " + res;
+            return String.Format("Name: {0}\nHP: {1}\nDEF: {2}\nRES: {3}", name, hp, def, res);
         }
 
         public override int TakeDamage(int dealt, bool ignoreDefense = false) // take damage, returns damage dealt. if ignoredef is true then res is used
@@ -57,10 +58,10 @@ namespace Void_CS.Entity
             }
             else
             {
-                double reduced = dealt - (res * dealt);
-                ouch -= dealt;
+                double reduced = (double)dealt * (1.0 - res);
+                ouch = (int)Math.Floor(reduced);
 
-                if (reduced < 0)
+                if (ouch < 0)
                 {
                     ouch = 0;
                 }

@@ -4,9 +4,9 @@ Text game to practice OOP concepts
 ## Battle system
 Attacking does what you think it does.  
 Defending doubles **base** defense and res for the next incoming attack.
+Using a spell does what you think it does, and uses the RES stat instead of DEF like arknights. This costs MP. What a surprise.  
 
 ### These aren't done yet
-Using a spell does what you think it does, and uses the RES stat instead of DEF like arknights. This costs MP. What a surprise.  
 Special attacks deal pure damage and hurt. Like they should. This costs SP. What's new?  
 After killing something you get to take its life essence and level up. Games like to call this EXP.  
 Additionally, you can take whatever money the monster had and trade it for equipment. How they manage to carry gold around like that i haven't decided.  

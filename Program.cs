@@ -20,12 +20,11 @@ namespace Void_CS
             TextHandler.Print(Fireball.ToString());
 
             Spell Smite = new Spell("Smite", 200, 50);
+            Spell CheapSmite = new Spell("Dollar store smite", 10, 4);
 
             Steve.AddSpell(Fireball);
             Steve.AddSpell(Smite);
-            Console.WriteLine(Steve.GetSpellList());
-
-            Steve.AddWeapon(MeleeWeaponList.WoodSword);
+            Steve.AddSpell(CheapSmite);
 
             Battle.BattleMode(Steve);
         }

@@ -20,7 +20,7 @@ namespace Void_CS.Entity
         private protected int atk;
         private protected int matk;
         private protected int def;
-        private protected int res;
+        private protected double res;
         private protected int level;
 
         private protected EntityType type;
@@ -57,7 +57,7 @@ namespace Void_CS.Entity
             return def;
         }
 
-        public int GetRES()
+        public double GetRES()
         {
             return res;
         }

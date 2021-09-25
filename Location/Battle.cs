@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using Void_CS.Entity;
 using Void_CS.Handler;
@@ -31,8 +31,8 @@ namespace Void_CS.Location
         }
         public static void BattleMode(Player p1)
         {
-            SoundPlayer soundPlayer = new SoundPlayer("Audio\\select.wav");
-            soundPlayer.PlayLooping();
+            //SoundPlayer soundPlayer = new SoundPlayer("Audio\\select.wav");
+            //soundPlayer.PlayLooping();
 
             Monster opponent = MonsterGenerator.GenerateMonster(p1);
 
@@ -45,8 +45,8 @@ namespace Void_CS.Location
                 TextHandler.Print("Your opponent: ");
                 TextHandler.Print(opponent.ToString() + "\n");
 
-                TextHandler.Print("What will you do?");
-                TextHandler.Print("1. Attack\n2. Magic\n3. Defend", timeout:5);
+                TextHandler.Print("What will you do? Type the number of the action.");
+                TextHandler.Print("[1] Attack\n[2] Magic\n[3] Defend", timeout:5);
 
                 Int32.TryParse(Console.ReadLine(), out action);
 
@@ -152,8 +152,8 @@ namespace Void_CS.Location
 
             do
             {
-                TextHandler.Print("You have chosen to toss magic.\nPlease select a spell.\n");
-                TextHandler.Print(p1.GetSpellList(), 2);
+                TextHandler.Print("You have chosen to toss magic.\nPlease select a spell by entering the index number.\n");
+                TextHandler.Print(p1.GetSpellList(), 0);
 
                 valid = Int32.TryParse(Console.ReadLine(), out selection);
             }
@@ -168,6 +168,10 @@ namespace Void_CS.Location
             if (!playerSpellSpecs.Item3)
             {
                 TextHandler.Print("Insufficient mana to cast this spell.");
+                System.Threading.Thread.Sleep(900);
+                TextHandler.Print("Press enter to continue");
+                Console.ReadLine();
+
                 return;
             }
 
@@ -175,7 +179,7 @@ namespace Void_CS.Location
             if (rng.NextDouble() <= playerSpellSpecs.Item2)
             {
                 TextHandler.Print(String.Format("Oof! Critical hit! Rolled {0} instead of {1} damage.", playerSpellSpecs.Item1 * 3, playerSpellSpecs.Item1));
-                TextHandler.Print("Dealt {0} damage. That's gotta hurt.", monster.TakeDamage(playerSpellSpecs.Item1 * 3, true));\
+                TextHandler.Print("Dealt {0} damage. That's gotta hurt.", monster.TakeDamage(playerSpellSpecs.Item1 * 3, true));
 
                 p1.UseMP(playerSpellSpecs.Item4);
                 TextHandler.Print(String.Format("MP: {0}/{1}", p1.GetMP(), p1.GetMaxMP()));
@@ -183,8 +187,20 @@ namespace Void_CS.Location
             else
             {
                 TextHandler.Print("Casting...");
-                TextHandler.Print("Dealt {0} damage.", monster.TakeDamage(playerSpellSpecs.Item1));
+                TextHandler.Print(String.Format("Dealt {0} damage.", monster.TakeDamage(playerSpellSpecs.Item1, true)));
                 p1.UseMP(playerSpellSpecs.Item4);
+            }
+
+            if (monster.IsDead())
+            {
+                TextHandler.Print("You killed it! Victory Royale!");
+                return;
+            }
+            else
+            {
+                TextHandler.Print("Press enter to continue...");
+                Console.ReadLine();
+                MonsterAttack(p1, monster);
             }
         }
     }
