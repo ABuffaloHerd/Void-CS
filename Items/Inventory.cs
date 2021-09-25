@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Void_CS.Action;
+using Void_CS.Handler;
 
 // Basically, backpack manager
 namespace Void_CS.Items
@@ -16,8 +17,9 @@ namespace Void_CS.Items
 
         public Inventory()
         {
-            weaponList = new Weapon[3] { null, null, null };
-            armourList = new Armour[3] { null, null, null };
+            weaponList = new Weapon[3];
+            armourList = new Armour[3];
+            spellList = new Spell[SpellCapacity.DEFAULT_SPELL_CAP];
         }
 
 #pragma warning disable CS0184 // ok ok you can shut up now
@@ -53,7 +55,56 @@ namespace Void_CS.Items
             }
         }
 
+        public void EquipSpell(Spell magick, int slot = -1)
+        {
+            if (slot == -1)
+            {
+                for (int x = 0; x < SpellCapacity.DEFAULT_SPELL_CAP; x++)
+                {
+                    if (spellList[x] is null)
+                    {
+                        spellList[x] = magick;
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                spellList[slot] = magick;
+            }
+        }
+
 #pragma warning restore CS0184
+
+        public string ListAllSpells()
+        {
+            string output = "";
+            int x = 0;
+
+            foreach (Spell spell in spellList)
+            {
+                if (spell != null)
+                {
+                    output += String.Format("Index [{0}]\n{1}\n\n", x, spell.ToString());
+                }
+
+                x++;
+            }
+
+            return output;
+        }
+
+        public Spell GetSpell(int index)
+        {
+            if (index > 0 || index < SpellCapacity.DEFAULT_SPELL_CAP)
+            {
+                return spellList[index];
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public Armour GetArmour(ArmourType type)
         {

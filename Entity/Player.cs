@@ -29,7 +29,6 @@ namespace Void_CS.Entity
         private const int SP_MAX_ABS = 30;
 
         private Inventory backpack;
-        private Spell[] spellList;
 
         private int gold;
         public Player(string name, string quest, string colour)
@@ -42,8 +41,6 @@ namespace Void_CS.Entity
             type = EntityType.PLAYER;
             level = 1;
             exp = 0;
-
-            spellList = new Spell[SpellCapacity.DEFAULT_SPELL_CAP];
 
             SetStatsFromLevel();
             RefreshStats();
@@ -98,6 +95,16 @@ namespace Void_CS.Entity
         public void AddWeapon(Weapon thing)
         {
             backpack.EquipWeapon(thing);
+        }
+
+        public void AddArmour(Armour thing)
+        {
+            backpack.EquipArmour(thing);
+        }
+
+        public void AddSpell(Spell thing)
+        {
+            backpack.EquipSpell(thing);
         }
 
         public void RefreshStats()
@@ -180,14 +187,33 @@ namespace Void_CS.Entity
             return new Tuple<Int32, Double>(GetInventory().GetTotalDefense() + def, GetInventory().GetTotalRes() + ((double)res / 100));
         }
 
-        new public Spell GetMATK()
+        // Ok so this one returns a tuple with MATK and crit rate, as well as a bool that tells the battle handler if the spell can be used
+        public Tuple<Int32, Double, Boolean, Int32> GetMATK(int index)
         {
-            return null;
+            Spell spell = backpack.GetSpell(index);
+            bool canUse = (spell.GetCost() - mp) > 0;
+
+            return new Tuple<Int32, Double, Boolean, Int32>(spell.GetATK(), spell.GetCrit(), canUse, spell.GetCost());
+        }
+
+        public string GetSpellList()
+        {
+            return backpack.ListAllSpells();
+        }
+
+        public Spell GetSpell(int index)
+        {
+            return backpack.GetSpell(index);
         }
 
         public int GetMP()
         {
             return mp;
+        }
+
+        public int GetMaxMP()
+        {
+            return mp_max;
         }
 
         public void UseMP(int amount)
